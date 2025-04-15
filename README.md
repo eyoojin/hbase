@@ -79,3 +79,33 @@ scan 'messages', { COLUMNS => ['info:text'] }
 scan 'messages', { STARTROW => 'room1', STOPROW => 'room2' }
 scan 'messages', { FILTER => "PrefixFilter('room1')" }
 ```
+
+# pyenv
+```shell
+pyenv install 3.11.12
+pyenv versions
+python -V
+pyenv global 3.13.2 
+
+ubuntu@1-14:~/damf2/hbase$ pyenv local 3.11.12 
+```
+- `pyenv`를 사용하여 프로젝트마다 python 버전을 다르게 사용
+
+# fastAPI ~ hbase
+- fastAPI 서버 실행
+```shell
+uvicorn main:app --reload --port 9999
+```
+- hbase 서버 실행
+```shell
+bin/hbase-daemon.sh start thrift
+```
+
+- `hbase shell`
+```shell
+list
+disable 'chatrooms'
+drop 'chatrooms'
+create 'chatrooms', 'info'
+create 'messages', 'info'
+```
